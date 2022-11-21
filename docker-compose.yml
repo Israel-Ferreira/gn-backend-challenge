@@ -23,6 +23,28 @@ services:
 
     networks:
       - gn-backend-net
+
+
+  order-service: 
+    container_name: order-handle-service
+    build:
+      context: order-handle-service
+
+    environment:
+      - RABBIT_MQ_BROKER_URL=amqp://guest:guest@rabbitmq:5672/
+      - DB_HOST=pedidos-db
+      - DB_PORT=5432
+      - DB_USER=pedido_user
+      - DB_NAME=pedido
+      - DB_PASS=pedidoGN1234
+
+    ports:
+      - 9000:9000
+
+    networks:
+      - gn-backend-net
+
+
       
 
 networks:
