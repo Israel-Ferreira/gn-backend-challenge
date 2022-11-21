@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    container_name: rabbit-mq
+    image: rabbitmq:3.10-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+    - gn-backend-net
+
+  pedidos-db: 
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_DB=pedido
+      - POSTGRES_USER=pedido_user
+      - POSTGRES_PASSWORD=pedidoGN1234
+
+    ports:
+      - "35432:5432"
+
+    networks:
+      - gn-backend-net
+      
+
+networks:
+  gn-backend-net:
